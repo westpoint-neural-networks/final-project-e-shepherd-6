@@ -1,0 +1,72 @@
+default:
+    trainer: ppo
+    batch_size: 128
+    beta: 1.0e-2
+    buffer_size: 2048
+    epsilon: 0.2
+    hidden_units: 256
+    lambd: 0.95
+    learning_rate: 3.0e-4
+    learning_rate_schedule: linear
+    max_steps: 1.0e6
+    memory_size: 256
+    normalize: false
+    num_epoch: 3
+    num_layers: 2
+    time_horizon: 128
+    sequence_length: 64
+    summary_freq: 1000
+    use_recurrent: false
+    vis_encode_type: simple
+    reward_signals:
+        extrinsic:
+            strength: 1.0
+            gamma: 0.99
+
+ShooterBehavior:
+    use_curiosity: true
+    normalize: false
+    lambd: 0.92
+    num_epoch: 3
+    summary_freq: 1000
+    time_horizon: 256
+    batch_size: 2048
+    buffer_size: 10240
+    hidden_units: 512
+    num_layers: 3
+    beta: 1.0e-2
+    max_steps: 1.0e7
+    learning_rate: 1e-4
+    learning_rate_schedule: linear
+    reward_signals:
+        extrinsic:
+            strength: 1.0
+            gamma: 0.99
+        curiosity:
+            strength: 0.02
+            gamma: 0.99
+            encoding_size: 256
+
+ShooterBehavior1:
+    use_curiosity: true
+    normalize: false
+    lambd: 0.92
+    num_epoch: 3
+    summary_freq: 1000
+    time_horizon: 256
+    batch_size: 2048
+    buffer_size: 10240
+    hidden_units: 512
+    num_layers: 3
+    beta: 1.0e-2
+    max_steps: 1.0e7
+    learning_rate: 1e-4
+    learning_rate_schedule: linear
+    reward_signals:
+        extrinsic:
+            strength: 1.0
+            gamma: 0.99
+        curiosity:
+            strength: 0.02
+            gamma: 0.99
+            encoding_size: 256
