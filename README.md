@@ -1,4 +1,6 @@
-# final-project
+# A Study in Adversarial Behavior using Unity
+
+**Overview**
 
 **Installation**
 
@@ -18,4 +20,13 @@
 ```
 - On the command line you should be able to run mlagents-learn --help
 
-**Environment Setup**
+**Opening Virgil Project**
+- Launch Unity
+
+**Environment Setup (for standalone project)**
+- Launch Unity
+- Drag the *UnitySDK* folder located in the cloned repo into the assets window at the bottom of the Unity interface
+- Go to Edit > Project Settings > Player
+- Expand the Other Settings section
+- Select Scripting Runtime Version to Experimental (.NET 4.6 Equivalent or .NET 4.x Equivalent)
+- Go to File > Save Project
