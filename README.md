@@ -25,6 +25,7 @@
 
 **Opening Virgil Project**
 - Launch Unity
+- File -> Open Project -> Select Cloned Folder
 
 **Environment Setup (for standalone project)**
 - Launch Unity
