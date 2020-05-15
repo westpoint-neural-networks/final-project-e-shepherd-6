@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//ensures camera stays locked in position over agent
 public class AgentCam : MonoBehaviour
 {
 

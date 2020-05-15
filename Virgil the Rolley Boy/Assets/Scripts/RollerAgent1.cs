@@ -4,16 +4,19 @@ using MLAgents;
 
 public class RollerAgent1 : Agent
 {
+    //Define variables
     Rigidbody rBody;
     public Transform Target;
     public float closestDist;
     public Vector3[] positionArray = new Vector3[9];
     public Vector3[] positionArray1 = new Vector3[8];
 
+    //Start function runs at beginning of every epoch
     void Start()
     {
         rBody = GetComponent<Rigidbody>();
 
+        //Establish spawn positions for target
         positionArray[0] = new Vector3(0f, 0.5f, 0f);
         positionArray[1] = new Vector3(6f, 0.5f, -18.5f);
         positionArray[2] = new Vector3(-6f, 0.5f, -18.5f);
@@ -33,6 +36,7 @@ public class RollerAgent1 : Agent
         positionArray1[7] = new Vector3(-18.5f, 0.5f, 18.5f);
     }
 
+    //Reset runs when the agent falls off the map, collides with target, or when epoch ends
     public override void AgentReset()
     {
 
@@ -44,40 +48,34 @@ public class RollerAgent1 : Agent
 
     }
 
+    //Executed at every frame, take environment inputs
     public override void CollectObservations()
     {
         // Target and Agent positions
         AddVectorObs(Target.localPosition);
         AddVectorObs(this.transform.localPosition);
         AddVectorObs(Vector3.Distance(this.transform.localPosition, Target.localPosition));
-
-        // Agent velocity
-        //AddVectorObs(rBody.velocity.x);
-        //AddVectorObs(rBody.velocity.z);
     }
 
+    // a rigidbody tagged as "Wall" hit the player, small punishment
     void OnCollisionEnter(Collision col)
     {
         if (col.gameObject.tag == "Wall")
         {
-            // a rigidbody tagged as "Wall" hit the player
-            //Debug.Log("Agent collided with wall");
             AddReward(-0.01f);
         }
     }
 
+    //Executes after all calculations are done for a frame, determines action agent will take
     public float speed = 10;
     public override void AgentAction(float[] vectorAction)
     {
+        //Small punishment executed every frame to encourage rapidly finding target
         AddReward(-0.001f/50f);
-        // Actions, size = 2
-        //Vector3 controlSignal = Vector3.zero;
-        //controlSignal.x = vectorAction[0];
-        //controlSignal.z = vectorAction[1];
-        //rBody.AddForce(controlSignal * speed);
+
+        // Actions
         Vector3 controlSignal = new Vector3(vectorAction[0], 0f, vectorAction[1]) * speed * Time.deltaTime;
         transform.Translate(controlSignal, Space.Self);
-        //transform.position = new Vector3(transform.position.x, , transform.position.z);
         float z = transform.eulerAngles.z;
         transform.Rotate(0, 0, -z);
 
@@ -85,6 +83,7 @@ public class RollerAgent1 : Agent
         float distanceToTarget = Vector3.Distance(this.transform.localPosition,
                                                   Target.localPosition);
 
+        //Small reward for getting closer to target
         if (distanceToTarget < closestDist)
         {
             closestDist = distanceToTarget;
@@ -96,7 +95,6 @@ public class RollerAgent1 : Agent
         {
             AddReward(1.0f);
             // Move the target to a new spot
-            //Target.localPosition = positionArray[Random.Range(0, 17)];
             if (Random.Range(0,2) == 0)
             {
                 Target.localPosition = positionArray[Random.Range(0, 9)];
@@ -117,6 +115,7 @@ public class RollerAgent1 : Agent
 
     }
 
+    //Can enable heuristic brain in Unity control panel for player controlled agent
     public override float[] Heuristic()
     {
         var action = new float[2];

@@ -24,14 +24,14 @@ default:
             gamma: 0.99
 
 RollerBehavior:
-    normalize: false
+    normalize: true
     lambd: 0.95
-    num_epoch: 3
+    num_epoch: 8
     summary_freq: 1000
     time_horizon: 100
     batch_size: 10
     buffer_size: 100
-    hidden_units: 128
+    hidden_units: 255
     num_layers: 2
     beta: 5.0e-3
     max_steps: 1.0e7
@@ -43,14 +43,14 @@ RollerBehavior:
             gamma: 0.99
 
 RollerBehavior1:
-    normalize: false
+    normalize: true
     lambd: 0.95
-    num_epoch: 3
+    num_epoch: 8
     summary_freq: 1000
     time_horizon: 100
     batch_size: 10
     buffer_size: 100
-    hidden_units: 128
+    hidden_units: 256
     num_layers: 2
     beta: 5.0e-3
     max_steps: 1.0e7
